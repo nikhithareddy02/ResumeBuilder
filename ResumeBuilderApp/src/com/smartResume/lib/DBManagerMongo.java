@@ -10,8 +10,6 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Set;
 
-
-
 //importing mongoJDBC driver collection
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
@@ -43,7 +41,7 @@ public class DBManagerMongo {
 				/*
 				 * Loading the database properties from properties file to propeties class object
 				 */
-				fi = new FileInputStream("jdbc.properties");
+				fi = new FileInputStream("C:\\Users\\npasula\\git\\Binny\\ResumeBuilderApp\\jdbc.properties");
 				pro.load(fi);
 			} catch (IOException e) {
 				e.printStackTrace();
