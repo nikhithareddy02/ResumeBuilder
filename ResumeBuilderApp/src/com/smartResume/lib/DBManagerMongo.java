@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Set;
 
+
 //importing mongoJDBC driver collection
 import com.mongodb.MongoClient;
 import com.mongodb.DB;
@@ -27,7 +28,7 @@ public class DBManagerMongo {
 		String ip= "";
 		int portNumber=0;
 		String database="";
-		StartMongo st = new StartMongo();
+		String DBPath="";
 		try {
 			/*
 			 * The Properties class represents a persistent set of properties. 
@@ -40,7 +41,7 @@ public class DBManagerMongo {
 				/*
 				 * Loading the database properties from properties file to propeties class object
 				 */
-				fi = new FileInputStream("D:\\Testing Practicum\\ResumeBuilderApp\\jdbc.properties");
+				fi = new FileInputStream("jdbc.properties");
 				pro.load(fi);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -51,6 +52,7 @@ public class DBManagerMongo {
 			ip =pro.getProperty("ip");
 			portNumber=Integer.parseInt(pro.getProperty("port"));
 			database=pro.getProperty("database");
+			DBPath = pro.getProperty("DBPath");
 			//System.out.println(ip+"\n"+portNumber+"\n"+database);
 			/*
 			 * If mongo db client exists, returns the database with db name as mentioned in properties file
@@ -62,7 +64,14 @@ public class DBManagerMongo {
 			 * If client doesn't exists 
 			 * Connecting to mongo server
 			 */
-			st.accessCommandLine();
+			 Runtime rt = Runtime.getRuntime();
+			 Process p;
+		     try {
+				p= rt.exec("C://Program Files//MongoDB 2.6 Standard//bin//mongod.exe --dbpath "+DBPath);//D://Mongo//data");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			client = new MongoClient(ip, portNumber);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
