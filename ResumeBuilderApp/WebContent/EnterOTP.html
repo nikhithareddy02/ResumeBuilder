@@ -1,0 +1,75 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>OTP</title>
+<link href="css/styleOTP.css" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <link rel="shortcut icon" href="img/favicon.ico">
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!-- Load ScrollTo -->
+    <script type="text/javascript" src="js/jquery.scrollTo-1.4.2-min.js"></script>
+    <!-- Load LocalScroll -->
+    <script type="text/javascript" src="js/jquery.localscroll-1.2.7-min.js"></script>
+    <!-- prettyPhoto Initialization -->
+</head>
+<body>
+ <script>
+    	function getOTPVerified(){
+    		var word = document.getElementById('OTP').value;
+    		var url='VerifyOTP?otp='+word;
+    		 <!--console.log("url: "+url);-->
+    		$.get(url,function(resp){ 
+    			var res = resp;
+    			 <!--console.log("resp: "+res);-->
+    			if(res == ""){
+    				console.log("hi I'm false");
+    			}
+    			else
+    			{
+    				document.write("You will be redirected to HOME page in 5 seconds");
+    				setTimeout(function(){
+    				       window.location='home.html';
+    				    }, 5000);//2 Seconds
+    				//window.location='index2.html';
+    			}    				
+    		});
+    	};
+    </script>
+<div class="wrap">
+<!-- strat-contact-form -->	
+<div class="contact-form" align="justify" style="left: 134px; top: 34px; width: 329px; height: 184px">
+<!-- start-form -->
+	<form class="contact_form" action="" method="post" name="contact_form" style="left: 59px; top: 11px; width: 95%">
+		<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ENTER OTP</h1>
+	    <ul>
+	        <li style="left: 0px; top: 0px; width: 63%">
+	            <input type="text" class="textbox1" name="otp" id="OTP" onkeyup="getOTPVerified()" placeholder="eg.123456" required />
+	            <span class="form_hint">Enter OTP here</span>
+	             </li>
+         </ul>
+       	 	&nbsp;<div class="clear">
+       	 	<input type="submit" name="Sign In" value="SUBMIT" style="width: 64%"/></div>	
+	</form>
+<!-- end-form -->
+<!-- start-account -->
+
+<!-- end-account -->
+<div class="clear"></div>	
+</div>
+<!-- end-contact-form -->
+<div class="footer">
+	<p></p>
+</div>
+</div>
+</body>
+</html>

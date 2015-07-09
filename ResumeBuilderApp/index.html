@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<style type="text/css">
+.style1 {
+	margin-top: 0;
+}
+</style>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Login and Registration Form with HTML5 and CSS3</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style2.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+		<link rel="shortcut icon" href="img/favicon.ico">
+    	<!-- JQuery -->
+   	 	<script type="text/javascript" src="js/jquery.js"></script>
+    	<!-- Load ScrollTo -->
+    	<script type="text/javascript" src="js/jquery.scrollTo-1.4.2-min.js"></script>
+    	<!-- Load LocalScroll -->
+    	<script type="text/javascript" src="js/jquery.localscroll-1.2.7-min.js"></script>
+    	<!-- prettyPhoto Initialization -->
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>&nbsp;</h1>
+			<h1>Login and Registration Form <span>with HTML5 and CSS3</span></h1>
+            </header>
+            <section>				
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="style1" style="top: 31px; left: -1px">
+                                <h1>Log in</h1> 
+                                <script>
+                                function checkEmailExistsSignIn(){
+    								var email = document.getElementById("username").value;
+    								var url='CheckEmailExists?email='+email;
+    					    		console.log("url: "+url);
+    					    		$.get(url,function(resp){ 
+    					    			var res = resp;
+    					    			 <!--console.log("resp: "+res);-->
+    					    			if(res != ""){
+    					    				console.log("hi I'm false");
+    					    				document.getElementById("error").innerHTML="";
+    					    				document.getElementById("loginButton").hidden = "";
+    					    			}
+    					    			else
+    					    			{
+    					    				console.log("hi I'm true");
+    					    				document.getElementById("error").innerHTML="<font color='red'>Email NOT registered<br></font>"+
+    					    							"<font color='black'><a href='index.html#toregister'>ClickHere</a>for Register Page</font>";
+    					    				document.getElementById("loginButton").hidden = "hidden";
+    					    			}    				
+    					    		});
+    							};
+                                </script>
+                                <form  action="SignInServlet" method="post" autocomplete="off"> 
+                                <p> 
+                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
+                                    <input id="username" name="username" required="required" type="text" onchange="checkEmailExistsSignIn()" placeholder="myusername or mymail@mail.com"/>
+                                	<!-- below div is to check whether Email exists-->
+                                	<div id="error" align= "right" height: 2px" style="font-style:italic;">                       
+                                	</div>
+                                </p>
+                                <p> 
+                                    <label for="password" class="youpasswd" data-icon="p"> Your password </label>
+                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                                </p>
+                                <p class="keeplogin"> 
+									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
+									<label for="loginkeeping">Keep me logged in</label>
+								</p>
+                                <p class="login button"> 
+                                    <input type="submit" value="Login" id="loginButton" /> 
+								</p>
+                                <p class="change_link">
+									Not a member yet ?
+									<a href="#toregister" class="to_register">Join us</a>
+								</p>
+                            </form>
+                        </div>
+						<script>
+							function checkMobileNumber(){
+								<!--alert("function");-->
+								var phone = document.getElementById("phonenumber").value;
+								//console.log("resp: "+phone);
+								if((phone.length) != 10 || phone.match(/^[0-9]+$/) == null){
+									document.getElementById("errorMobile").innerHTML = "<font color='red'>Enter a valid 10 digit Mobile Number</font>";										
+									document.getElementById("register-button").hidden = "hidden";
+								}
+								else{
+									document.getElementById("errorMobile").innerHTML="";
+								}
+							};
+							function passwordValidation(){
+								var pwd = document.getElementById("passwordsignup").value;
+								if(pwd.length < 8 || pwd.match(/^[0-9]+$/) != null){
+									//console.log("resp: "+pwd);
+									document.getElementById("errorPassword").innerHTML="<font color='red'>Choose a strong password</font>";
+									document.getElementById("register-button").hidden = "hidden";
+								}
+								else{
+									//console.log("resp: "+pwd);
+									document.getElementById("errorPassword").innerHTML="";
+									document.getElementById("register-button").hidden = "";
+								}
+							};
+							function checkAllFieldsFilled(){
+								
+								var fname = document.getElementById("firstnamesignup").value;
+								var lname = document.getElementById("lastnamesignup").value;
+								var email = document.getElementById("emailsignup").value;
+								var mobileNo = document.getElementById("phonenumber").value;
+								var password = document.getElementById("passwordsignup").value; 
+								if(fname && lname && email && mobileNo && password){
+									<!--console.log("Visible");-->
+									document.getElementById("register-button").hidden = "";
+								}
+								else if(!fname || !lname ||  !email ||  !mobileNo || !password){
+									<!--console.log("hidden");-->
+									document.getElementById("register-button").hidden = "hidden";
+								}
+									
+							};
+							function checkEmailExists(){
+								var email = document.getElementById("emailsignup").value;
+								var url='CheckEmailExists?email='+email;
+					    		console.log("url: "+url);
+					    		$.get(url,function(resp){ 
+					    			var res = resp;
+					    			 <!--console.log("resp: "+res);-->
+					    			if(res == ""){
+					    				console.log("hi I'm false");
+					    				document.getElementById("errorSignUp").innerHTML="";
+					    				document.getElementById("register-button").hidden = "";
+					    			}
+					    			else
+					    			{
+					    				console.log("hi I'm true");
+					    				document.getElementById("errorSignUp").innerHTML="<font color='red'>Email Already registered<br></font>"+
+					    							"<font color='black'><a href='index.html#tologin'>ClickHere</a>for signIn Page</font>";
+					    				document.getElementById("register-button").hidden = "hidden";
+					    			}    				
+					    		});
+							};
+						</script>
+                        <div id="register" class="animate form">
+                            <form  action="RegistrationServlet" method="post" autocomplete="off"> 
+                                <h1> Sign up </h1> 
+                                <p> 
+                                    <label for="firstnamesignup" class="uname" data-icon="u">Your first name</label>
+                                    <input id="firstnamesignup" id = "firstname" name="firstname" onchange="checkAllFieldsFilled()" required="required" type="text" placeholder="first name" />
+                                </p>
+								<p> 
+                                    <label for="lastnamesignup" class="uname" data-icon="u">Your last name</label>
+                                    <input id="lastnamesignup" id="lastname" name="lastname" onchange="checkAllFieldsFilled()" required="required" type="text" placeholder="Last name" />
+                                </p>
+                                <p> 
+                                    <label for="emailsignup" class="youmail" data-icon="e" > Your email</label>
+                                    <input id="emailsignup" name="email" required="required" onchange="checkAllFieldsFilled()" onkeyup="checkEmailExists()" type="email" placeholder="mysupermail@mail.com"/> 
+                                	<div id="errorSignUp" align= "right" height: 2px" style="font-style:italic;"></div>
+                                </p>
+								</p>
+								<p> 
+                                    <label for="phonenumber" class="uname" data-icon="e" >Mobile Number</label>
+                                    <input id="phonenumber" name="phonenumber" required="required" type="text" onchange="checkAllFieldsFilled()" onkeyup = "checkMobileNumber()" placeholder="10 digit mobile number"/> 
+									<div id="errorMobile" align= "right" height: 2px style="font-style:italic;"><font color="red"></font>                            
+                                	</div>								
+                                </p>
+                                <p> 
+                                    <label for="passwordsignup" class="youpasswd" data-icon="p">Your password </label>
+                                    <input id = "passwordsignup" name="password" required="required" type="password" placeholder="eg. X8df!90EO" onkeyup = "passwordValidation()" onchange="checkAllFieldsFilled()"/>
+									<div id="errorPassword" align= "right" height: 2px style="font-style:italic;"><font color="red"></font>                            
+                                	</div>
+								</p>
+                                <p class="signin button"> 
+									<input type="submit" id="register-button" hidden = "hidden" value="Sign up"/> 
+								</p>
+                                <p class="change_link">  
+									Already a member ?
+									<a href="#tologin" class="to_register"> Go and log in </a>
+								</p>
+                            </form>
+                        </div>
+						
+                    </div>
+                </div>  
+            </section>
+        </div>
+    </body>
+</html>
