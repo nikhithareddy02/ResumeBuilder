@@ -3,11 +3,13 @@
  */
 package com.smartResume.lib;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.Set;
+
 
 
 //importing mongoJDBC driver collection
@@ -87,6 +89,13 @@ public class DBManagerMongo {
 
 	public static void main(String[] args) {
 		try {
+			File currentDirectory = new File(new File(".").getAbsolutePath());
+			try {
+				System.out.println(currentDirectory.getCanonicalPath());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			System.out.println(currentDirectory.getAbsolutePath());
 			DB db = DBManagerMongo.connectToMongo();
 			Set<String> st = db.getCollectionNames();
 			System.out.println(st.toString());
