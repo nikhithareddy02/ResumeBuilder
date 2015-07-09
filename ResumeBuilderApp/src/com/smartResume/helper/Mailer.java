@@ -34,6 +34,7 @@ public class Mailer {
 		
 		Session session = Session.getDefaultInstance(props,  
 				new javax.mail.Authenticator() {  
+			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {  
 				return new PasswordAuthentication(user,pass);  
 			}  
